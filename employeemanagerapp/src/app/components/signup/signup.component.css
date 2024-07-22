@@ -1,0 +1,53 @@
+i {
+  width: auto;
+  position: relative;
+  bottom: 25px;
+  float: right;
+  /* font-size: 20px;
+  line-height: 40px; */
+  cursor: pointer;
+  z-index: 2;
+  color: #03045fc7;
+}
+
+#message {
+    display:none;
+    position: relative;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  #messageMatch {
+    display:none;
+    position: relative;
+    padding: 10px;
+  }
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+  }
+  
+  .valid::before {
+    /* font-family: "Font Awesome 5 Free"; */
+    font-family: FontAwesome;
+    position: relative;
+    /* left: -35px; */
+    float: left;
+    content: "\f00c";
+  }
+  
+  /* Add a red text color and an "x" when the requirements are wrong */
+  .invalid {
+    color: red;
+  }
+  
+  .invalid::before {
+    /* font-family: "Font Awesome 5 Free"; */
+    font-family: FontAwesome;
+    position: relative;
+    /* left: -35px; */
+    float: left;
+    /* content: "&#10006;"; */
+    content: "\f00d";
+  }

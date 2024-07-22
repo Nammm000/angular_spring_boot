@@ -1,0 +1,154 @@
+<app-top-bar [diaryss]="diarys" (diarys)="setDiarys($event)"></app-top-bar>
+
+<div class="container" id="main-container">
+
+    <!-- Show diarys -->
+    <div class="row">
+        <div *ngFor="let diary of diarys" class="col-md-6 col-xl-3">
+           <app-infor-tag [diary]="diary" (deleteDiary)="setDeleteDiary($event)" (editDiary)="setUpdateDiary($event)"></app-infor-tag>
+        </div>
+      </div>
+      
+      <!-- Add Diary Modal -->
+      <div class="modal fade" id="addDiaryModal" tabindex="-1" role="dialog" aria-labelledby="addDiaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+             <div class="modal-header">
+                <h5 class="modal-title" id="addDiaryModalLabel">Add diary</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+             </div>
+             <div class="modal-body">
+                <form #addForm="ngForm" (ngSubmit)="onAddDiary(addForm)">
+                <div class="form-group">
+                   <label for="title">Title</label>
+                   <input type="text" ngModel name="title" class="form-control" id="title" placeholder="Title" required>
+                </div>
+                <!-- <div class="form-group">
+                   <label for="datetime-local">Created Time</label>
+                   <input type="datetime-local" ngModel class="form-control" id="datetime-local" name="createdTime" placeholder="Created Time" required/>
+                </div> -->
+                <div class="form-group">
+                   <label for="status">Accessibility</label>
+                   <!-- <input type="text" ngModel name="jobTitle" class="form-control" id="jobTile" placeholder="Job title" required> -->
+                   <select id="status" name="status" class="form-control">
+                     <option value="PUBLIC" selected>Public</option>
+                     <option value="PRIVATE">Private</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group">
+                   <label for="phone">Phone</label>
+                   <input type="text" ngModel name="phone" class="form-control" id="phone" placeholder="Phone" required>
+                </div> -->
+                <div class="form-group">
+                   <label for="content">Content</label>
+                   <textarea id="content" name="content" ngModel class="form-control" required></textarea>
+                   <!-- <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL" required> -->
+                </div>
+                <div class="modal-footer">
+                   <button type="button" id="add-diary-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="addForm.invalid" type="submit" value="Save" class="btn btn-primary" >Save changes</button>
+                </div>
+                </form>
+             </div>
+          </div>
+        </div>
+        </div>
+      
+       <!-- Edit Modal -->
+       <div class="modal fade" id="updateDiaryModal" tabindex="-1" role="dialog" aria-labelledby="diaryEditModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="updateDiaryModalLabel">Edit diary {{editDiary?.title}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form #editForm="ngForm">
+                     <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" ngModel="{{editDiary?.title}}" name="title" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Title">
+                     </div>
+                     <input type="hidden" ngModel="{{editDiary?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+                     <input type="hidden" ngModel="{{editDiary?.diaryCode}}" name="userCode" class="form-control" id="userCode" placeholder="Email">
+                     <!-- <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" ngModel="{{editDiary?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+                     </div> -->
+                     <!-- <div class="form-group">
+                        <label for="datetime-local">Created Time</label>
+                        <input type="datetime-local" ngModel="{{editDiary?.createdTime}}" class="form-control" id="datetime-local" name="createdTime" placeholder="Created Time" required/>
+                        <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+                     </div> -->
+                     <!-- <div class="form-group">
+                        <label for="phone">Job title</label>
+                        <input type="text" ngModel="{{editDiary?.jobTitle}}" name="jobTitle" class="form-control" id="jobTitle" placeholder="Job title">
+                     </div> -->
+                     <!-- <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" ngModel="{{editDiary?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                     </div> -->
+                     <!-- <div class="form-group">
+                        <label for="phone">Image URL</label>
+                        <input type="text" ngModel="{{editDiary?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
+                     </div> -->
+                     <div class="form-group">
+                        <select id="status" class="form-control" ngModel="{{editDiary?.accessibility}}" name="status">
+                          <option value="PUBLIC">Public</option>
+                          <option value="PRIVATE">Private</option>
+                       </select>
+                      <label for="phone">Accessibility</label>
+                     </div>
+                     <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea id="body" class="form-control" ngModel="{{editDiary?.content}}" name="body" required></textarea>
+                     </div>
+      
+                     <div class="modal-footer">
+                        <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                        <button (click)="onUpdateDiary(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+       </div>
+       
+       <!-- Delete Modal -->
+       <div class="modal fade" id="deleteDiaryModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModelLabel">Delete diary</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>Are you sure you want to delete diary {{deleteDiary?.title}}?</p>
+                  <div class="modal-footer">
+                     <!-- <h1>{{deleteDiary.id}}</h1> -->
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                     <button (click)="onDeleteDiary(deleteDiary?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+       </div>
+
+</div>
+
+<!-- Notification for no diarys -->
+<div *ngIf="diarys?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO diaryS!</h4>
+      <p>No diarys were found.</p>
+    </div>
+</div>
+
+<div>
+    <app-add-button class="float-sm-right m-3" width="64" height="64" ></app-add-button>
+ </div>

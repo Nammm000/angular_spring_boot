@@ -1,0 +1,21 @@
+<div class="card m-b-30">
+    <div class="card-body row">
+       <!-- <div class="col-6">
+          <a href=""><img src="{{diary?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
+       </div> -->
+       <div class="col-6 card-title align-self-center mb-0">
+          <h5 [routerLink]="['/diary', diary?.id]">{{diary?.title}}</h5>
+          <p class="m-0">{{diary?.content}}</p>
+       </div>
+    </div>
+    <ul class="list-group list-group-flush">
+       <!-- <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{diary?.accessibility}}</li> -->
+       <li class="list-group-item"><i class="fa fa-phone float-right"></i>{{diary?.createdTime}}</li>
+    </ul>
+    <div class="card-body">
+       <div class="d-flex justify-content-between">
+          <a (click)="onOpenModal(diary, 'edit')" class="btn btn-primary btn-circle" data-placement="top" data-original-title="Edit" title="Edit"><i class="fa fa-pencil"></i></a>
+          <a (click)="onOpenModal(diary, 'delete')" class="btn btn-secondary btn-circle" data-placement="top" data-original-title="Delete" title="Delete"><i class="fa fa-times"></i></a>
+       </div>
+    </div>
+ </div>

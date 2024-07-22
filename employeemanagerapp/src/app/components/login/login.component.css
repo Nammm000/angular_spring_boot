@@ -1,0 +1,11 @@
+i {
+  width: auto;
+  position: relative;
+  bottom: 25px;
+  float: right;
+  /* font-size: 20px; */
+  /* line-height: 40px; */
+  cursor: pointer;
+  z-index: 2;
+  color: #03045fc7;
+}
